@@ -8,7 +8,6 @@ import { SelectHuman } from './SelectHuman';
 
 export const Task = ({ taskId }) => {
   const dispatch = useDispatch();
-
   const task = useSelector((state) =>
     state.tasks.find((task) => task.id === taskId)
   );
@@ -18,13 +17,11 @@ export const Task = ({ taskId }) => {
       <Flex marginBottom="space40">
         <Checkbox
           id={`task-${taskId}`}
-          checked={task.complete}
-          // onChange={(event) => dispatch(
-          //   tasksSlice.actions.toggle({taskId, completed: event.target.checked})
-          // )}
-          onChange={(event) => dispatch(
-            toggleTask(taskId, event.target.checked)
-          )}
+          checked={task.completed}
+          onChange={(event) => {
+            dispatch(toggleTask(taskId, event.target.checked));
+          }
+         }
         />
         <Label htmlFor={`task-${taskId}`}>{task.title}</Label>
       </Flex>
